@@ -1,0 +1,28 @@
+#include <Arduino.h>
+
+// Pin connected to the LM35 temperature sensor
+const int lm35Pin = A0;
+
+void setup() {
+  // Initialize Serial communication
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read the raw analog value from the LM35 temperature sensor
+  int rawValue = analogRead(lm35Pin);
+  
+  // Convert the raw value to voltage (0-5V)
+  float voltage = rawValue * (5.0 / 1023.0);
+  
+  // Convert the voltage to temperature in Celsius
+  float temperatureC = voltage * 100.0;
+  
+  // Print the temperature to the Serial Monitor
+  Serial.print("Temperature: ");
+  Serial.print(temperatureC);
+  Serial.println(" °C");
+  
+  // Delay for some time before taking the next reading
+  delay(1000);
+}
